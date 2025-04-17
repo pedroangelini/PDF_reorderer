@@ -1,4 +1,4 @@
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 
 
 def ifexists(total_pages, page_no):
@@ -23,11 +23,11 @@ def reodering(path):
     """
 
     # Creating object of Read and Write functions of the Library.
-    pdf_writer = PdfFileWriter()
-    pdf_reader = PdfFileReader(path)
+    pdf_writer = PdfWriter()
+    pdf_reader = PdfReader(path)
 
     # get total no.of pages ie length of PDF
-    total_pages = pdf_reader.getNumPages()
+    total_pages = len(pdf_reader.pages)
     # creates a list of of total pages in ascending order
     ordered_pages = [i + 1 for i in range(total_pages)]
 
@@ -68,7 +68,7 @@ def reodering(path):
     print("\nPDF being prepared !")
     for page in ordered_pages:
         # adding pages in write function page by page
-        pdf_writer.addPage(pdf_reader.getPage(page - 1))
+        pdf_writer.add_page(pdf_reader.pages[page - 1])
 
     # Saving the PDF with the specified name
     output_file = input("Enter the filename in which you want to save (without .pdf extension): ") + '.pdf'
